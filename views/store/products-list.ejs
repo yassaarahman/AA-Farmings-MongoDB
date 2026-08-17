@@ -1,0 +1,39 @@
+<%- include('../partials/head') %>
+  <body class="bg-gray-100 h-screen">
+    <header class="sticky top-0">
+      <%- include('../partials/storeNav') %>
+    </header>
+    <main class="flex flex-col items-center">
+      <h1 class="w-3/4 my-5 text-4xl font-bold text-center underline">Products</h1>
+      <div class="w-3/4 flex flex-wrap justify-center">
+        <% products.forEach(product => { %>
+            <div class="m-4 w-64 flex flex-col items-start gap-2 bg-gray-300 text-center rounded-xl">
+              <img class="w-full self-center rounded-t-xl" src="<%= product.imageUrl %>" alt="">
+              <h2 class="ml-4 text-2xl font-bold"><%= product.productName %> </h2>
+              <span class="px-4 w-full flex justify-between">
+                <p class="text-lg font-medium"> <%= product.price %> </p>
+                <p> &#9733; <%= product.rating %></p>
+              </span>
+              <div class="mt-10 mb-2 flex justify-center self-center gap-3">
+                <a href="products-list/<%= product._id %>" class="p-1.5 bg-green-700 text-gray-100 text-lg font-semibold rounded-xl">Details</a>
+                <div class="flex justify-center">
+                  <form action="/cart" method="post">
+                    <button
+                      type="submit"
+                      class="flex-1 text-center bg-blue-500 hover:bg-blue-600 text-white p-1.5 rounded-xl text-lg font-semibold transition duration-300 shadow-xl cursor-pointer"
+                    >
+                      Add to Cart
+                    </button>
+                    <input
+                      type="hidden"
+                      name="id"
+                      value="<%= product._id %>"
+                    />
+                  </form>
+                </div>
+              </div>
+            </div>
+        <% }) %>
+      </div>
+    </main>
+  </body>
