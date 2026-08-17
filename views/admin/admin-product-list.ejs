@@ -1,0 +1,52 @@
+<%- include('../partials/head') %>
+  <body class="bg-gray-50">
+    <header>
+      <%- include('../partials/adminNav') %>
+    </header>
+    <main class="flex flex-col items-center">
+      <h1 class="w-3/4 p-4 text-3xl text-center bg-gray-50">Products</h1>
+      <div class="flex flex-wrap justify-center">
+        <% products.forEach(product => { %>
+            <div 
+              class="m-4 w-64 flex flex-col items-start gap-2 bg-gray-300 text-center rounded-xl"
+            >
+              <a 
+                class="w-full self-center rounded-t-xl"
+                href="/product-details/<%= product._id %>"
+              >
+                <img 
+                  class="w-full self-center rounded-t-xl"
+                  src="<%= product.imageUrl %>"
+                  alt="<%= product.productName %>"
+                >
+              </a>
+              <h2 class="ml-4 text-2xl font-bold"><%= product.productName %> </h2>
+              <span class="px-4 w-full flex justify-between">
+                <p class="text-lg font-medium">Rs <%= product.price %>/- </p>
+                <p> &#9733; <%= product.rating %></p>
+              </span>
+              <div class="mt-10 mb-2 flex justify-center self-center gap-3">
+                <a
+                  href="edit-product/<%= product._id %>?editing=true"
+                  class="px-4 py-1.5 bg-blue-500 text-gray-100 text-lg font-semibold rounded-xl"
+                >
+                Edit
+                </a>
+                <form
+                  class="p-1.5 flex items-center justify-center bg-red-500 text-gray-100 text-lg font-semibold rounded-xl"
+                  action="delete-product/<%= product._id %> "
+                  method="post">
+                  <button 
+                    type="submit"
+                    class="cursor-pointer"
+                  >
+                  Delete
+                  </button>
+                </form>
+              </div>
+            </div>
+        <% }) %>
+      </div>
+    </main>
+  </body>
+</html>
