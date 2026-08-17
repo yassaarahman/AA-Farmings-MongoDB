@@ -1,0 +1,35 @@
+<%- include('../partials/head') %>
+<body>
+  <header><%- include('../partials/storeNav') %></header>
+  <main class="flex flex-col items-center">
+    <h1 class="w-3/4 my-5 text-4xl font-bold text-center underline">Cart</h1>
+    <div class="w-3/4 flex flex-wrap justify-center">
+    <% cartProducts.forEach(product => { %>
+            <div
+              class="m-4 w-64 flex flex-col items-start gap-2 bg-linear-to-b from-gray-400 via-gray-300 to-gray-200 text-center rounded-xl"
+            >
+              <img
+                class="w-full self-center rounded-t-xl"
+                src="<%= product.imageUrl %>"
+                alt="<%= product.productName %>"
+              >
+              <h2 class="ml-4 text-2xl font-bold"><%= product.productName %> </h2>
+              <span class="px-4 w-full flex justify-between">
+                <p class="text-lg font-medium"> <%= product.price %> </p>
+                <p> &#9733; <%= product.rating %></p>
+              </span>
+              <div class="mt-10 mb-2 flex justify-center self-center gap-3">
+                <form
+                  action="cart/delete/<%= product._id %>"
+                  class="p-1.5 bg-blue-700 text-gray-100 text-lg font-semibold rounded-xl"
+                  method="post"
+                >
+                <button class="cursor-pointer" type="submit">Remove</button>
+                </form>
+                <button class="p-1.5 bg-red-700 text-gray-100 text-lg font-semibold rounded-xl cursor-pointer">Buy Now</button>
+              </div>
+            </div>
+        <% }) %>
+    </div>
+  </main>
+</body>
