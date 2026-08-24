@@ -1,0 +1,41 @@
+<nav class="flex justify-evenly items-center p-2 bg-gray-200">
+  <div>
+    <a href="/home">
+      <img src="/images/logo.png" alt="" class="h-12 rounded-full" />
+    </a>
+  </div>
+  <div>
+    <ul class="flex w-full justify-center items-center">
+      <li class="p-2 text-xl hover:text-2xl">
+        <a href="/home">Home</a>
+      </li>
+    <% if (isLoggedIn) { %>
+       <li class="p-2 text-xl hover:text-2xl">
+        <a href="/products-list">Products</a>
+      </li>
+      <li class="p-2 text-xl hover:text-2xl">
+        <a href="/admin/add-product">Add Product</a>
+      </li>
+      <li class="p-2 text-xl hover:text-2xl">
+        <a href="/admin/admin-product-list">Admin Products</a>
+      </li>
+      <li class="p-2 text-xl hover:text-2xl">
+        <a href="/cart">Cart</a>
+      </li>
+    </ul>
+  </div>
+  <div>
+    <ul class="flex">
+      <% } %>
+      <li class="text-xl hover:text-2xl">
+        <% if (!isLoggedIn) { %>
+          <a href="/login">Login</a>
+        <% } else { %>
+          <form action="/logout" method="post">
+            <input class="cursor-pointer" type="submit" value="Log out">
+          </form>
+        <% } %>
+      </li>
+    </ul>
+  </div>
+</nav>
