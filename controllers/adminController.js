@@ -5,6 +5,7 @@ exports.getAdminProductList = (req, res) => {
     res.render("admin/admin-product-list", {
       products,
       pageTitle: "Products",
+      isLoggedIn: req.isLoggedIn,
     });
   });
 };
@@ -13,6 +14,7 @@ exports.getAddProduct = (req, res) => {
   res.render("admin/add-product", {
     pageTitle: "Add Product | AA-Farmings",
     editing: false,
+    isLoggedIn: req.isLoggedIn,
   });
 };
 
@@ -42,6 +44,7 @@ exports.getEditProduct = (req, res, next) => {
         product,
         editing,
         pageTitle: "Edit Product | AA Farmings",
+        isLoggedIn: req.isLoggedIn,
       });
     }
   });
@@ -76,7 +79,7 @@ exports.postDeleteProduct = (req, res) => {
   Product.findByIdAndDelete(productId)
     .then(() => {
       console.log("Product deleted successfully");
-      res.redirect("/admin-product-list");
+      res.redirect("/admin/admin-product-list");
     })
     .catch((error) => {
       console.log("Error while deleting product ", error);
