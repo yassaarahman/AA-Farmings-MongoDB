@@ -1,0 +1,70 @@
+<%- include('../partials/head') %>
+
+  <body class="bg-gray-100 h-screen">
+    <header class="sticky top-0">
+      <%- include('../partials/nav') %>
+    </header>
+    <main class="w-full min-h-[calc(100vh-80px)] flex flex-col items-center justify-center">
+      <!-- Login Card -->
+      <div class="w-1/3 min-h-120 bg-white rounded-2xl shadow-lg p-8 flex flex-col justify-center">
+        <!-- Header -->
+        <div class="text-center mb-8">
+          <h1 class="text-3xl font-bold text-gray-900">Welcome Back</h1>
+
+          <p class="text-gray-500 mt-2">Sign in to your account</p>
+        </div>
+
+        <!-- Login Form -->
+        <form action="/login" method="POST" class="space-y-5">
+          <!-- Email -->
+          <div>
+            <label
+              for="email"
+              class="block text-sm font-medium text-gray-700 mb-2"
+            >
+              Email
+            </label>
+
+            <input
+              type="email"
+              id="email"
+              name="email"
+              placeholder="you@example.com"
+              required
+              autocomplete="email"
+              class="w-full px-4 py-3 border border-[#FB5D01] rounded-lg outline-none transition focus:ring-2 focus:ring-[#FB5D01] focus:border-[#FB5D01]"
+            />
+          </div>
+
+          <!-- Password -->
+          <div>
+            <label
+              for="password"
+              class="block text-sm font-medium text-gray-700 mb-2"
+            >
+              Password
+            </label>
+
+            <input
+              type="password"
+              id="password"
+              name="password"
+              placeholder="Enter your password"
+              required
+              autocomplete="current-password"
+              class="w-full px-4 py-3 border border-[#FB5D01] rounded-lg outline-none transition focus:ring-2 focus:ring-[#FB5D01] focus:border-[#FB5D01]"
+            />
+          </div>
+
+          <!-- Submit -->
+          <button
+            type="submit"
+            class="w-full bg-[#FB5D01] hover:bg-[#E65300] text-white font-semibold py-3 rounded-lg transition duration-200 focus:outline-none focus:ring-2 focus:ring-[#FB5D01] focus:ring-offset-2 cursor-pointer"
+          >
+            Login
+          </button>
+        </form>
+      </div>
+    </main>
+  </body>
+</html>
