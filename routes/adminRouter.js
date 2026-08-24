@@ -10,7 +10,10 @@ const {
 } = require("../controllers/adminController");
 
 adminRouter.get("/admin-home", (req, res, next) => {
-  res.render("admin/admin-home", { pageTitle: "Home | Admin" });
+  res.render("admin/admin-home", {
+    pageTitle: "Home | Admin",
+    isLoggedIn: req.isLoggedIn,
+  });
 });
 
 adminRouter.get("/admin-product-list", getAdminProductList);
