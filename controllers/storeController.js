@@ -1,5 +1,6 @@
 const Product = require("../models/products");
 const Cart = require("../models/cart");
+const session = require("express-session");
 
 exports.getHome = (req, res, next) => {
   Product.find()
@@ -7,6 +8,7 @@ exports.getHome = (req, res, next) => {
       res.render("store/home", {
         products,
         pageTitle: "Home | AA Farmings",
+        isLoggedIn: req.session.isLoggedIn,
       });
     })
     .catch((error) => {
@@ -19,6 +21,7 @@ exports.getProducts = (req, res) => {
     res.render("store/products-list", {
       products,
       pageTitle: "Products | AA Farmings",
+      isLoggedIn: req.isLoggedIn,
     });
   });
 };
@@ -33,6 +36,7 @@ exports.getProductDetailsByID = (req, res) => {
     res.render("store/product-details", {
       product: product,
       pageTitle: "Details",
+      isLoggedIn: req.isLoggedIn,
     });
   });
 };
@@ -47,6 +51,7 @@ exports.getCart = (req, res) => {
       res.render("store/cart", {
         cartProducts,
         pageTitle: "Cart",
+        isLoggedIn: req.isLoggedIn,
       });
     });
 };
