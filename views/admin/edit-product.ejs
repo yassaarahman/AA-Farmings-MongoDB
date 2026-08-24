@@ -1,10 +1,10 @@
 <%- include('../partials/head') %>
 <body>
-  <%- include('../partials/adminNav') %>
+  <%- include('../partials/nav') %>
     <main>
       <h1 class="mt-5 text-4xl text-center">Edit the Product</h1>
       <div class="m-4 flex justify-center items-center">
-        <form class="w-1/3 p-6 bg-gray-100 rounded-xl flex flex-col" action="/edit-product/<%= product._id %>" method="POST">
+        <form class="w-1/3 p-6 bg-gray-100 rounded-xl flex flex-col" action="/admin/edit-product/<%= product._id %>" method="POST">
           <input class="p-2 m-1 text-2xl border-2 border-gray-300 rounded-lg" name="id" type="hidden" value="<%= product._id %>">
           <label class="text-2xl mt-2" for="productName">Name: </label>
           <input class="p-2 m-1 text-2xl border-2 border-gray-300 rounded-lg" type="text" name="productName" placeholder="Product Name" value="<%= product.productName %>" required />
