@@ -2,12 +2,11 @@
 const path = require("path");
 
 // External Module
+require("dotenv").config();
 const express = require("express");
 const { Result } = require("postcss");
 const session = require("express-session");
 const MongoDBStore = require("connect-mongodb-session")(session);
-const DB_PATH =
-  "mongodb://root:root@ac-wn1imgd-shard-00-00.dpdyonr.mongodb.net:27017,ac-wn1imgd-shard-00-01.dpdyonr.mongodb.net:27017,ac-wn1imgd-shard-00-02.dpdyonr.mongodb.net:27017/aa-farmings?ssl=true&replicaSet=atlas-7ecux2-shard-0&authSource=admin&appName=Cluster0";
 
 // Local Modules
 const { adminRouter } = require("./routes/adminRouter");
@@ -21,6 +20,7 @@ const errorsController = require("./controllers/404");
 const { log } = require("console");
 
 const app = express();
+const DB_PATH = process.env.DB_URL;
 
 app.set("view engine", "ejs");
 app.set("views", "views");
