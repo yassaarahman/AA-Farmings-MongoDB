@@ -6,6 +6,7 @@ exports.getAdminProductList = (req, res) => {
       products,
       pageTitle: "Products",
       isLoggedIn: req.isLoggedIn,
+      user: req.session.user,
     });
   });
 };
@@ -15,6 +16,7 @@ exports.getAddProduct = (req, res) => {
     pageTitle: "Add Product | AA-Farmings",
     editing: false,
     isLoggedIn: req.isLoggedIn,
+    user: req.session.user,
   });
 };
 
@@ -28,7 +30,7 @@ exports.postAddProduct = (req, res) => {
     description,
   });
   product.save().then(() => {
-    res.redirect("/admin-product-list");
+    res.redirect("/admin/admin-product-list");
   });
 };
 
@@ -45,6 +47,7 @@ exports.getEditProduct = (req, res, next) => {
         editing,
         pageTitle: "Edit Product | AA Farmings",
         isLoggedIn: req.isLoggedIn,
+        user: req.session.user,
       });
     }
   });
@@ -67,7 +70,7 @@ exports.postEditProduct = (req, res) => {
         .catch((err) => {
           console.log("Error while updating product ", err);
         });
-      res.redirect("/admin-product-list");
+      res.redirect("/admin/admin-product-list");
     })
     .catch((err) => {
       console.log("Error while finding product ", err);

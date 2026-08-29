@@ -1,6 +1,6 @@
 const Product = require("../models/products");
-const Cart = require("../models/cart");
 const session = require("express-session");
+const User = require("../models/user");
 
 exports.getHome = (req, res, next) => {
   Product.find()
@@ -8,7 +8,8 @@ exports.getHome = (req, res, next) => {
       res.render("store/home", {
         products,
         pageTitle: "Home | AA Farmings",
-        isLoggedIn: req.session.isLoggedIn,
+        isLoggedIn: req.isLoggedIn,
+        user: req.session.user,
       });
     })
     .catch((error) => {
@@ -22,6 +23,7 @@ exports.getProducts = (req, res) => {
       products,
       pageTitle: "Products | AA Farmings",
       isLoggedIn: req.isLoggedIn,
+      user: req.session.user,
     });
   });
 };
@@ -37,49 +39,43 @@ exports.getProductDetailsByID = (req, res) => {
       product: product,
       pageTitle: "Details",
       isLoggedIn: req.isLoggedIn,
+      user: req.session.user,
     });
   });
 };
 
-exports.getCart = (req, res) => {
-  Cart.find()
-    .populate("productID")
-    .then((cart) => {
-      const cartProducts = cart.map((product) => {
-        return product.productID;
-      });
-      res.render("store/cart", {
-        cartProducts,
-        pageTitle: "Cart",
-        isLoggedIn: req.isLoggedIn,
-      });
-    });
+// Cart Controllers
+exports.getCart = async (req, res) => {
+  const userId = req.session.user.id;
+  const user = await User.findById(userId).populate("cart");
+  res.render("store/cart", {
+    cartProducts: user.cart,
+    pageTitle: "Cart",
+    isLoggedIn: req.isLoggedIn,
+    user: req.session.user,
+  });
 };
 
-exports.postAddToCart = (req, res) => {
+exports.postAddToCart = async (req, res) => {
   const productId = req.body.id;
-  Cart.findOne({ productID: productId }).then((cartProduct) => {
-    if (cartProduct) {
-      console.log("Product already in Cart");
-    } else {
-      const product = new Cart({ productID: productId });
-      product.save().then((result) => {
-        console.log("Product added successfully ", result);
-      });
-    }
-    return res.redirect("/cart");
-  });
+  const userId = req.session.user.id;
+  const user = await User.findById(userId);
+  if (!user.cart.includes(productId)) {
+    user.cart.push(productId);
+    await user.save();
+  }
+  return res.redirect("/cart");
 };
 
-exports.postRemoveFromCart = (req, res) => {
+exports.postRemoveFromCart = async (req, res) => {
   const productId = req.params.id;
-  console.log(productId);
-  Cart.findOneAndDelete({ productID: productId })
-    .then(() => {
-      console.log("Product removed successfully");
-      res.redirect("/cart");
-    })
-    .catch((err) => {
-      console.log("Error occured while removing item from cart ", err);
-    });
+  const userId = req.session.user.id;
+  const user = await User.findById(userId);
+
+  if (user.cart.includes(productId)) {
+    user.cart = user.cart.filter((cartProduct) => cartProduct != productId);
+    await user.save();
+  }
+
+  res.redirect("/cart");
 };

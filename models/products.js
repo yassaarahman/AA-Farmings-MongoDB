@@ -1,5 +1,4 @@
 const mongoose = require("mongoose");
-const Cart = require("./cart");
 
 const productSchema = new mongoose.Schema({
   productName: {
@@ -25,19 +24,4 @@ const productSchema = new mongoose.Schema({
   description: { type: String },
 });
 
-productSchema.pre("findOneAndDelete", async function (next) {
-  const productId = this.getQuery()._id;
-  await Cart.deleteMany({ productID: productId });
-  next;
-});
-
 module.exports = mongoose.model("Product", productSchema);
-
-/* 
-
-save()
-find()
-fetchProductById()
-deleteByProductId()
-
-*/
