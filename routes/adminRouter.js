@@ -9,13 +9,6 @@ const {
   postDeleteProduct,
 } = require("../controllers/adminController");
 
-adminRouter.get("/admin-home", (req, res, next) => {
-  res.render("admin/admin-home", {
-    pageTitle: "Home | Admin",
-    isLoggedIn: req.isLoggedIn,
-  });
-});
-
 adminRouter.get("/admin-product-list", getAdminProductList);
 
 adminRouter.get("/add-product", getAddProduct);
