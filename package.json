@@ -13,25 +13,27 @@
   "license": "ISC",
   "type": "commonjs",
   "devDependencies": {
-    "autoprefixer": "^10.5.0",
-    "concurrently": "^9.2.4",
+    "autoprefixer": "^10.5.4",
+    "concurrently": "^10.0.5",
     "nodemon": "3.1.14",
-    "postcss": "^8.5.15",
-    "prettier": "^3.9.5",
+    "postcss": "^8.5.26",
+    "prettier": "^3.9.6",
     "prettier-plugin-ejs": "^1.0.3",
-    "tailwindcss": "^4.3.1"
+    "tailwindcss": "^4.3.3"
   },
   "dependencies": {
-    "@tailwindcss/cli": "^4.3.1",
+    "@tailwindcss/cli": "^4.3.3",
+    "bcryptjs": "^3.0.3",
     "body-parser": "^2.3.0",
     "connect-mongodb-session": "^5.0.0",
     "dotenv": "^17.4.2",
     "ejs": "^6.0.1",
     "express": "^5.2.1",
     "express-session": "^1.19.0",
-    "mongodb": "^7.5.0",
-    "mongoose": "^9.9.2",
-    "mysql2": "^3.23.2"
+    "express-validator": "^7.3.2",
+    "mongodb": "^7.6.0",
+    "mongoose": "^9.9.4",
+    "mysql2": "^3.24.2"
   },
   "allowScripts": {
     "@parcel/watcher@2.5.1": true
