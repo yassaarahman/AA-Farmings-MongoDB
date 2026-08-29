@@ -6,30 +6,44 @@
   </div>
   <div>
     <ul class="flex w-full justify-center items-center">
+      
       <li class="p-2 text-xl hover:text-2xl">
         <a href="/home">Home</a>
       </li>
-    <% if (isLoggedIn) { %>
-       <li class="p-2 text-xl hover:text-2xl">
-        <a href="/products-list">Products</a>
-      </li>
-      <li class="p-2 text-xl hover:text-2xl">
-        <a href="/admin/add-product">Add Product</a>
-      </li>
-      <li class="p-2 text-xl hover:text-2xl">
-        <a href="/admin/admin-product-list">Admin Products</a>
-      </li>
-      <li class="p-2 text-xl hover:text-2xl">
-        <a href="/cart">Cart</a>
-      </li>
+    
+      <% if (isLoggedIn) { %>
+        <% if (user && user.userType === "buyer") { %>
+          
+          <li class="p-2 text-xl hover:text-2xl">
+            <a href="/products-list">Products</a>
+          </li>
+          
+          <li class="p-2 text-xl hover:text-2xl">
+            <a href="/cart">Cart</a>
+          </li>
+
+        <% } else { %>
+          
+          <li class="p-2 text-xl hover:text-2xl">
+            <a href="/admin/add-product">Add Product</a>
+          </li>
+          
+          <li class="p-2 text-xl hover:text-2xl">
+            <a href="/admin/admin-product-list">Products</a>
+          </li>
+
+        <% } %>
+      <% } %>
+    
     </ul>
   </div>
+  
   <div>
     <ul class="flex">
-      <% } %>
       <li class="text-xl hover:text-2xl">
         <% if (!isLoggedIn) { %>
           <a href="/login">Login</a>
+          <a href="/signup">Create Account</a>
         <% } else { %>
           <form action="/logout" method="post">
             <input class="cursor-pointer" type="submit" value="Log out">
