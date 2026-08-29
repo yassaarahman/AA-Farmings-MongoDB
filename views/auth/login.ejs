@@ -16,6 +16,10 @@
 
         <!-- Login Form -->
         <form action="/login" method="POST" class="space-y-5">
+
+          <!-- Error Body -->
+          <%- include('../partials/errors') %>
+
           <!-- Email -->
           <div>
             <label
@@ -30,6 +34,7 @@
               id="email"
               name="email"
               placeholder="you@example.com"
+              value="<%= oldInput.email ? oldInput.email : "" %>"
               required
               autocomplete="email"
               class="w-full px-4 py-3 border border-[#FB5D01] rounded-lg outline-none transition focus:ring-2 focus:ring-[#FB5D01] focus:border-[#FB5D01]"
