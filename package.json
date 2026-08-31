@@ -33,6 +33,7 @@
     "express-validator": "^7.3.2",
     "mongodb": "^7.6.0",
     "mongoose": "^9.9.4",
+    "multer": "^2.3.0",
     "mysql2": "^3.24.2"
   },
   "allowScripts": {
