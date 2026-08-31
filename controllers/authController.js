@@ -53,7 +53,7 @@ exports.postLogin = async (req, res, next) => {
   };
   await req.session.save();
 
-  res.redirect("/home");
+  res.redirect("/");
 };
 
 exports.getSignup = (req, res, next) => {

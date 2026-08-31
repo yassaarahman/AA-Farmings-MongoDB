@@ -9,7 +9,7 @@ const {
   postRemoveFromCart,
 } = require("../controllers/storeController");
 
-storeRouter.get("/home", getHome);
+storeRouter.get("/", getHome);
 storeRouter.get("/products-list", getProducts);
 storeRouter.get("/products-list/:id", getProductDetailsByID);
 storeRouter.get("/cart", getCart);
