@@ -1,4 +1,5 @@
 const Product = require("../models/products");
+const fs = require("fs");
 
 exports.getAdminProductList = (req, res) => {
   const products = Product.find().then((products) => {
@@ -21,12 +22,18 @@ exports.getAddProduct = (req, res) => {
 };
 
 exports.postAddProduct = (req, res) => {
-  const { productName, price, rating, imageUrl, description } = req.body;
+  const { productName, price, rating, description } = req.body;
+  console.log(productName, price, rating, description);
+  console.log("Post add product handler ", req.file);
+  if (!req.file) {
+    return res.status(422).send("<h2> Image not provided </h2>");
+  }
+
   const product = new Product({
     productName,
     price,
     rating,
-    imageUrl,
+    image: req.file.filename,
     description,
   });
   product.save().then(() => {
@@ -54,14 +61,21 @@ exports.getEditProduct = (req, res, next) => {
 };
 
 exports.postEditProduct = (req, res) => {
-  const { id, productName, price, rating, imageUrl, description } = req.body;
+  const { id, productName, price, rating, description } = req.body;
+
   Product.findById(id)
     .then((product) => {
       product.productName = productName;
       product.price = price;
       product.rating = rating;
-      product.imageUrl = imageUrl;
       product.description = description;
+      if (req.file) {
+        fs.unlink(file.image, (err) => {
+          console.log("Error while deleting image ", err);
+        });
+        product.image = req.file.filename;
+      }
+
       product
         .save()
         .then((result) => {
