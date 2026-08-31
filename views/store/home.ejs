@@ -10,7 +10,7 @@
       <div class="w-3/4 mt-12 flex flex-wrap justify-center">
          <% products.forEach(product => { %>
             <div class="m-2 w-64 flex flex-col items-start gap-2 bg-linear-to-b from-gray-400 via-gray-300 to-gray-200 text-center rounded-xl">
-              <img class="w-full self-center rounded-t-xl" src="<%= product.imageUrl %>" alt="">
+              <img class="w-full self-center rounded-t-xl" src="/uploads/<%= product.image %>" alt="">
               <h2 class="ml-4 text-2xl font-bold"><%= product.productName %> </h2>
               <span class="px-4 w-full flex justify-between">
                 <p class="text-lg font-medium">Rs <%= product.price %>/- </p>

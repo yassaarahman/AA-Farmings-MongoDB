@@ -54,6 +54,7 @@
     --font-weight-medium: 500;
     --font-weight-semibold: 600;
     --font-weight-bold: 700;
+    --radius-md: 0.375rem;
     --radius-lg: 0.5rem;
     --radius-xl: 0.75rem;
     --radius-2xl: 1rem;
@@ -725,6 +726,32 @@
     --tw-outline-style: none;
     outline-style: none;
   }
+  .file\:mr-4::file-selector-button {
+    margin-right: calc(var(--spacing) * 4);
+  }
+  .file\:cursor-pointer::file-selector-button {
+    cursor: pointer;
+  }
+  .file\:rounded-md::file-selector-button {
+    border-radius: var(--radius-md);
+  }
+  .file\:border-0::file-selector-button {
+    border-style: var(--tw-border-style);
+    border-width: 0px;
+  }
+  .file\:bg-gray-200::file-selector-button {
+    background-color: var(--color-gray-200);
+  }
+  .file\:px-4::file-selector-button {
+    padding-inline: calc(var(--spacing) * 4);
+  }
+  .file\:py-2::file-selector-button {
+    padding-block: calc(var(--spacing) * 2);
+  }
+  .file\:font-medium::file-selector-button {
+    --tw-font-weight: var(--font-weight-medium);
+    font-weight: var(--font-weight-medium);
+  }
   @media (hover: hover) {
     .hover\:scale-105:hover {
       --tw-scale-x: 105%;
@@ -750,6 +777,9 @@
     }
     .hover\:text-white:hover {
       color: var(--color-white);
+    }
+    .hover\:file\:bg-gray-300:hover::file-selector-button {
+      background-color: var(--color-gray-300);
     }
   }
   .focus\:border-\[\#FB5D01\]:focus {

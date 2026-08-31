@@ -6,19 +6,20 @@ require("dotenv").config();
 const express = require("express");
 const { Result } = require("postcss");
 const session = require("express-session");
+const { default: mongoose } = require("mongoose");
 const MongoDBStore = require("connect-mongodb-session")(session);
+const multer = require("multer");
 
 // Local Modules
 const { adminRouter } = require("./routes/adminRouter");
 const storeRouter = require("./routes/storeRouter");
 const authRouter = require("./routes/authRouter");
 const rootDir = require("./utils/pathUtil");
-const { default: mongoose } = require("mongoose");
 
 // Controller
 const errorsController = require("./controllers/404");
-const { log } = require("console");
 
+// App Body
 const app = express();
 const DB_PATH = process.env.DB_URL;
 
@@ -30,7 +31,34 @@ const store = new MongoDBStore({
   collection: "sessions",
 });
 
+// Multer Storage Configuration
+const storage = multer.diskStorage({
+  destination: (req, file, callback) => {
+    callback(null, "uploads/");
+  },
+  filename: (req, file, callback) => {
+    callback(null, Date.now() + "-" + file.originalname);
+  },
+});
+
+const fileFilter = (req, file, callback) => {
+  if (
+    ["image/jpeg", "image/png", "image/heic", "image/jpg"].includes(
+      file.mimetype,
+    )
+  ) {
+    callback(null, true);
+  } else {
+    callback(null, false);
+  }
+};
+
+const multerOptions = { storage, fileFilter };
+
 app.use(express.urlencoded({ extended: true }));
+app.use(multer(multerOptions).single("image"));
+app.use(express.static(path.join(rootDir, "public")));
+app.use("/uploads", express.static(path.join(rootDir, "uploads")));
 
 // Session Midleware
 app.use(
@@ -57,7 +85,6 @@ app.use("/admin", (req, res, next) => {
 });
 app.use("/admin", adminRouter);
 app.use(storeRouter);
-app.use(express.static(path.join(rootDir, "public")));
 
 app.use(errorsController.pageNotFound);
 

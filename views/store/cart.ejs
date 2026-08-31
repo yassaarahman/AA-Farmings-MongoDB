@@ -10,12 +10,12 @@
             >
               <img
                 class="w-full self-center rounded-t-xl"
-                src="<%= product.imageUrl %>"
+                src="/uploads/<%= product.image %>"
                 alt="<%= product.productName %>"
               >
               <h2 class="ml-4 text-2xl font-bold"><%= product.productName %> </h2>
               <span class="px-4 w-full flex justify-between">
-                <p class="text-lg font-medium"> <%= product.price %> </p>
+                <p class="text-lg font-medium">Rs <%= product.price %>/- </p>
                 <p> &#9733; <%= product.rating %></p>
               </span>
               <div class="mt-10 mb-2 flex justify-center self-center gap-3">
